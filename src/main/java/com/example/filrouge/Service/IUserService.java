@@ -15,7 +15,7 @@ public interface IUserService {
     UserDto getById(Long id);
     UserDto getByName(String name);
     String getByEmail(String email);
-   // UserDto getByEmailInObject(String email);
+    UserDto getByEmailInObject(String email);
     void checkExistEmail(UserDto userDto);
     void SiNoEqualCheckEmailExist(User userExist, UserDto userDto);
     void validation(UserDto userDto);

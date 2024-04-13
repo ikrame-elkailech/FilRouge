@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 ///import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +27,7 @@ public class UserServiceImpl implements IUserService {
 
     private final IUserRepository iUserRepository;
     private final ModelMapper modelMapper;
-    //private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDto add(UserDto userDto)
@@ -52,7 +54,7 @@ public class UserServiceImpl implements IUserService {
         userExist.setPrenom(userDto.getPrenom());
         userExist.setSexe(userDto.getSexe());
         userExist.setAdresse(userDto.getAdresse());
-        //userExist.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userExist.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userExist.setVille(userDto.getVille());
         userExist.setTelephone(userDto.getTelephone());
 
@@ -103,12 +105,12 @@ public class UserServiceImpl implements IUserService {
         return null;
     }
 
-//    @Override
-//    public UserDto getByEmailInObject(String email)
-//    {
-//        User user = iUserRepository.findByEmailAndDeletedFalse(email).orElseThrow(() -> new UsernameNotFoundException("User not found with this email : " + email));
-//        return modelMapper.map(user, UserDto.class);
-//    }
+    @Override
+    public UserDto getByEmailInObject(String email)
+    {
+        User user = iUserRepository.findByEmailAndDeletedFalse(email).orElseThrow(() -> new UsernameNotFoundException("User not found with this email : " + email));
+        return modelMapper.map(user, UserDto.class);
+    }
 
     @Override
     public void checkExistEmail(UserDto userDto)
