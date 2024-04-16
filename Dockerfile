@@ -1,9 +1,4 @@
-FROM openjdk:17-jdk
-
-WORKDIR /app
-
-COPY target/FilRouge-0.0.1-SNAPSHOT.jar /app/FilRouge.jar
-
-EXPOSE 8080
-
-CMD ["java", "-jar" ,"labxpert.jar"]
+FROM openjdk:17-jdk-alpine
+ARG JAR_FILE=target/FilRouge-0.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]

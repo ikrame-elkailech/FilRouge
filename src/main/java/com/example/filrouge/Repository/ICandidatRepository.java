@@ -1,6 +1,7 @@
 package com.example.filrouge.Repository;
 
 import com.example.filrouge.Entities.Candidat;
+import com.example.filrouge.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +14,6 @@ public interface ICandidatRepository extends JpaRepository<Candidat,Long> {
     List<Candidat> findAllByDeletedFalse();
     Optional<Candidat> findByIdAndDeletedFalse(Long id);
 
+    List<Candidat> findByDeletedFalse();
     Optional<Candidat> findByNomAndDeletedFalse(String name);
 }
